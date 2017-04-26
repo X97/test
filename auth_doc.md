@@ -11,11 +11,16 @@
 
 非对称加密算法下由认证服务验证token的有效性。
 
-### 数据库设计
+### 业务设计
+#### 数据库
  * 存放注册应用相关的信息
 名称、 描述、 地址、 clilent_key、 client_secret
  * 存放用户相关信息
 mobile_phone、 email、password、 avator 等信息
+
+#### 类
+
+![身份认证类图.png](http://upload-images.jianshu.io/upload_images/1803273-d6e5307aa187efa0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## 二、技术方案
 #### 关键字 
@@ -72,9 +77,9 @@ mobile_phone、 email、password、 avator 等信息
 4. 业务服务器更新后返回确认信息。 若业务服务没有及时返回确认信息， 那么每过2的i(0 < N) 次方时间重新发送一次密钥(Ｎ的大小取决于生成密钥的周期)。
 
 ### 获得初始化对称加密密钥
- * 认证服务器提供初始化密钥借口接口， 当业务服务器第一次启动、或者宕机后重新启动应该请求该接口
+ * 认证服务器提供初始化密钥借口接口， 当业务服务器第一次启动、或者宕机后重新启动应该请求该接口。
  
-```
-GET /initial_secret/?client_id=<client_it>&client_secret=<client_secret>
-Host: www.example.com
-```
+  ```
+  GET /initial_secret/?client_id=<client_id>&client_secret=<client_secret>
+  Host: www.example.com
+  ```
