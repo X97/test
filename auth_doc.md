@@ -20,7 +20,7 @@
 ## 二、技术方案
 #### 关键字 
  * client_key、client_secret: 注册业务服务后所返回的唯一标识用户的信息
- * APP_SECRET_REFREH_API：  业务服务同步密钥的借口（必须）
+ * APP_SECRET_REFREH_API：  业务服务同步密钥的接口（必须）
  * APP_API_SECRET：         业务服务同步密钥时所需要的校验签名
  * HTTP_X_AUTH_HMAC_SHA256：  HTTP首部信息， 认证服务根据APP_API_SECRET所计算的哈希值保存在存放在ＨTTP首部。 用来校验更新密钥请求和合法性。
  
@@ -38,7 +38,7 @@
 
 
 ### 对称加密算法密钥同步
-1. 业务服务提供同步接口, 该借口接受来自于认证服务的POST请求。
+1. 业务服务提供同步接口, 该接口接受来自于认证服务的POST请求。
 2. 通过校验签名APP_API_SECRET判断POST请求是否来自于认证服务器。
   * 认证服务器将新的对称加密密钥跟用户所填写的校验签名APP_API_SECRET进行哈希运算， 将哈希运算的结果放在HTTP首部HTTP_X_AUTH_HMAC_SHA256中。
   * 认证服务送POST请求到业务服务器提供的密钥更新接口。 
