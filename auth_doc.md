@@ -72,7 +72,9 @@ mobile_phone、 email、password、 avator 等信息
 4. 业务服务器更新后返回确认信息。 若业务服务没有及时返回确认信息， 那么每过2的i(0 < N) 次方时间重新发送一次密钥(Ｎ的大小取决于生成密钥的周期)。
 
 ### 获得初始化对称加密密钥
- * 认证服务器提供初始化密钥借口接口， 当业务服务器第一次启动、或者宕机后重新启动应该请求该借口
-  ```GET /initial_secret/?client_id=<client_it>&client_secret=<client_secret>
-     Host: www.example.com
-  ```
+ * 认证服务器提供初始化密钥借口接口， 当业务服务器第一次启动、或者宕机后重新启动应该请求该接口
+ 
+```
+GET /initial_secret/?client_id=<client_it>&client_secret=<client_secret>
+Host: www.example.com
+```
