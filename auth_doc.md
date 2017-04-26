@@ -1,10 +1,17 @@
 ## 一、整体设计
+### 业务流程
+**对称加密下业务服务处理流程**
+![对称加密算法下的认证流程.png](http://upload-images.jianshu.io/upload_images/1803273-989ba3ad6afaf2df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+**非对称加密下业务服务处理流程**
+![非对称加密算法下的认证流程.png](http://upload-images.jianshu.io/upload_images/1803273-b1dc151f4a7adcb4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 ## 二、技术方案
 #### 关键字 
- * client_key、client_secret
- * APP_SECRET_REFREH_API
- * APP_API_SECRET
- * HTTP_X_AUTH_HMAC_SHA256 
+ * client_key、client_secret: 注册业务服务后所返回的唯一标识用户的信息
+ * APP_SECRET_REFREH_API：  业务服务同步密钥的借口（必须）
+ * APP_API_SECRET：         业务服务同步密钥时所需要的校验签名
+ * HTTP_X_AUTH_HMAC_SHA256：  HTTP首部信息， 认证服务根据APP_API_SECRET所计算的哈希值保存在存放在ＨTTP首部。 用来校验更新密钥请求和合法性。
  
 #### 业务服务申请加入
  1. 业务服务填写应用名称、应用简介、应用地址、应用图表创建应用。
