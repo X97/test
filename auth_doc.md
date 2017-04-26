@@ -12,10 +12,10 @@
 非对称加密算法下由认证服务验证token的有效性。
 
 ### 数据库设计
-   * 存放注册应用相关的信息
-      名称、 描述、 地址、 clilent_key、 client_secret
-   * 存放用户相关信息
-     mobile_phone、 email、password、 avator 等信息
+ * 存放注册应用相关的信息
+名称、 描述、 地址、 clilent_key、 client_secret
+ * 存放用户相关信息
+mobile_phone、 email、password、 avator 等信息
 
 ## 二、技术方案
 #### 关键字 
