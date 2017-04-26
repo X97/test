@@ -1,10 +1,13 @@
 ## 一、整体设计
 ### 业务流程
 **对称加密下业务服务处理流程**
-![对称加密算法下的认证流程.png](http://upload-images.jianshu.io/upload_images/1803273-989ba3ad6afaf2df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![对称加密算法下的认证流程(1).png](http://upload-images.jianshu.io/upload_images/1803273-6132291953978c58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+对称加密算法下先由业务服务验证token的有效性。
 
 **非对称加密下业务服务处理流程**
 ![非对称加密算法下的认证流程.png](http://upload-images.jianshu.io/upload_images/1803273-b1dc151f4a7adcb4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+非对称加密算法下由认证服务验证token的有效性。
 
 ## 二、技术方案
 #### 关键字 
