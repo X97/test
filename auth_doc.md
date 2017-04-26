@@ -83,3 +83,7 @@ mobile_phone、 email、password、 avator 等信息
   GET /initial_secret/?client_id=<client_id>&client_secret=<client_secret>
   Host: www.example.com
   ```
+ 
+ ## 问答
+ #### 如何及时有效的同步密钥信息？
+   答： 数据库中会记录每个注册应用的接受密钥更新请求的地址。 对所有有效的应用发送更新请求。 当发送更新请求后， 如火认证服务没有受到确认回复。 认证请求会重复发送， 直到超出预期发送次数。 超出预期发送次数后， 认证服务器会标记该应用为不可用。 密钥更新后不会对该应用发送密钥更新请求。
