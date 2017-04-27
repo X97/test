@@ -1,47 +1,46 @@
 ## 一、整体设计
-### 业务流程
-**对称加密下业务服务处理流程**
+### 1. 业务流程
+#### 1.1 对称加密下业务服务处理流程
 
 ![对称加密算法下的认证流程(1).png](http://upload-images.jianshu.io/upload_images/1803273-6132291953978c58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 对称加密算法下先由业务服务验证token的有效性。
 
-**非对称加密下业务服务处理流程**
+####1.2 非对称加密下业务服务处理流程
 ![非对称加密算法下的认证流程(1).png](http://upload-images.jianshu.io/upload_images/1803273-56822b9b34f4d982.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 非对称加密算法下由认证服务验证token的有效性。
 
-### 业务设计
-#### 数据库
+### 2. 业务设计
+#### 2.1 数据库
 ![登陆认证SQL.png](http://upload-images.jianshu.io/upload_images/1803273-3343019d76fdf97c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
  * 存放注册应用相关的信息/client
-name、 description、 domain、 clilent_key、 client_secret
  * 存放用户相关信息/user
-mobile_phone、 email、password、 avator 
  * 管理每个客户端/ clientmanager
 
-#### 类
+#### 2.2 类
 
 ![身份认证类图.png](http://upload-images.jianshu.io/upload_images/1803273-d6e5307aa187efa0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## 二、技术方案
-#### 关键字 
+### 1. 关键字 
  * client_key、client_secret: 注册业务服务后所返回的唯一标识用户的信息
  * APP_SECRET_REFREH_API：  业务服务同步密钥的接口（必须）
  * APP_API_SECRET：         业务服务同步密钥时所需要的校验签名
  * HTTP_X_AUTH_HMAC_SHA256：  HTTP首部信息， 认证服务根据APP_API_SECRET所计算的哈希值保存在存放在ＨTTP首部。 用来校验更新密钥请求和合法性。
  
-### 申请应用
+### 2. 申请应用
  1. 业务服务填写应用名称、应用简介、应用地址、应用图表创建应用。
  2. 认证服务确认申请，返回client_key 和 client_secret 。
  3. 应用申请成功后在应用管理界面配置应用密钥更新接口APP_SECRET_REFREH_API(用于对称密钥的同步), 配置校验签名APP_API_SECRET（用来验证所受到的密钥是否来自于服务器）。
-### 放置登录标识
-### OAuth2.0对接
+### 3. 放置登录标识
+### 4. OAuth2.0对接
  * 用户打开客户端以后，客户端要求用户给予授权。
  * 用户同意给予客户端授权。
  * 客户端使用上一步获得的授权，向认证服务器申请令牌。
  * 认证服务器对客户端进行认证以后，确认无误，同意发放令牌。
+ 
 ## 三、具体细节
 
 
@@ -101,5 +100,5 @@ mobile_phone、 email、password、 avator 
   ```
  
  ## 问答
- #### 如何及时有效的同步密钥信息？
+ ### 1. 如何及时有效的同步密钥信息？
    答： 数据库中会记录每个注册应用的接受密钥更新请求的地址。 对所有有效的应用发送更新请求。 当发送更新请求后， 如火认证服务没有受到确认回复。 认证请求会重复发送， 直到超出预期发送次数。 超出预期发送次数后， 认证服务器会标记该应用为不可用。 密钥更新后不会对该应用发送密钥更新请求。
