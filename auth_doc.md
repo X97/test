@@ -126,8 +126,7 @@ def check_valid_request():
 4. 当有新的业务服务到来时， 初始化密钥。 并将该业务服务加入到指针所指向的上一个slot中。
 5. 当某个业务服务长时间未进行确认回复时， 将该指针从对应的集合中移除。
 
-
-![密钥更新整体流程(2).png](http://upload-images.jianshu.io/upload_images/1803273-cc46770b358cf21f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![密钥更新整体流程(3).png](http://upload-images.jianshu.io/upload_images/1803273-fda968cc2a2018b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 <a class="mk-toclify" id="3"></a>
 ### 3. 获得初始化对称加密密钥
