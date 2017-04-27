@@ -80,6 +80,8 @@ mobile_phone、 email、password、 avator 等信息
 认证服务器要保证不同的业务服务器使用不同的密钥， 即密钥的唯一性。假设共有50个业务服务。每一个密钥的生命周期为60分钟。
 那么每过60分钟就要对到期的密钥进行一次旋转。
 
+![密钥同步结构设计.png](http://upload-images.jianshu.io/upload_images/1803273-6173678bb71cac1d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 具体做法：
 1. 创建一个0到60的环形队列， 环上的每个slot是一个业务服务器的集合。
 2. 设定一个指针。 指向环上的某一个slot， 每隔一分钟移动一下指针。
