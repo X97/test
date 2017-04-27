@@ -1,14 +1,12 @@
-## 一、整体设计
+## 整体设计
 ### 1. 业务流程
 #### 1.1 对称加密下业务服务处理流程
 
 ![对称加密算法下的认证流程(1).png](http://upload-images.jianshu.io/upload_images/1803273-6132291953978c58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
 对称加密算法下先由业务服务验证token的有效性。
 
 #### 1.2 非对称加密下业务服务处理流程
 ![非对称加密算法下的认证流程(1).png](http://upload-images.jianshu.io/upload_images/1803273-56822b9b34f4d982.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
 非对称加密算法下由认证服务验证token的有效性。
 
 ### 2. 业务设计
@@ -19,32 +17,31 @@
  * 存放用户相关信息/user
  * 管理每个客户端/ clientmanager
 
-#### 2.2 类
+#### 2.2 类图
+![身份认证类图.png](http://upload-images.jianshu.io/upload_images/1803273-eba2a839a5342a27.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![身份认证类图.png](http://upload-images.jianshu.io/upload_images/1803273-d6e5307aa187efa0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-## 二、技术方案
+## 技术方案
 ### 1. 关键字 
  * client_key、client_secret: 注册业务服务后所返回的唯一标识用户的信息
- * APP_SECRET_REFREH_API：  业务服务同步密钥的接口（必须）
- * APP_API_SECRET：         业务服务同步密钥时所需要的校验签名
- * HTTP_X_AUTH_HMAC_SHA256：  HTTP首部信息， 认证服务根据APP_API_SECRET所计算的哈希值保存在存放在ＨTTP首部。 用来校验更新密钥请求和合法性。
+ * APP_SECRET_REFREH_API： 业务服务同步密钥的接口（必须）
+ * APP_API_SECRET：  业务服务同步密钥时所需要的校验签名
+ * HTTP_X_AUTH_HMAC_SHA256： HTTP首部信息， 认证服务根据APP_API_SECRET所计算的哈希值保存在存放在ＨTTP首部。 用来校验更新密钥请求和合法性。
+### 2 流程
+#### 2.1 申请应用
+   1. 业务服务填写应用名称、应用简介、应用地址、应用图表创建应用。
+   2. 认证服务确认申请，返回client_key 和 client_secret 。
+   3. 应用申请成功后在应用管理界面配置应用密钥更新接口APP_SECRET_REFREH_API(用于对称密钥的同步), 配置校验签名APP_API_SECRET（用来验证所受到的密钥是否来自于服务器）。
+#### 2.2. 放置登录标识
+### 2.3 OAuth2.0对接
+   * 用户打开客户端以后，客户端要求用户给予授权。
+   * 用户同意给予客户端授权。
+   * 客户端使用上一步获得的授权，向认证服务器申请令牌。
+   * 认证服务器对客户端进行认证以后，确认无误，同意发放令牌。
  
-### 2. 申请应用
- 1. 业务服务填写应用名称、应用简介、应用地址、应用图表创建应用。
- 2. 认证服务确认申请，返回client_key 和 client_secret 。
- 3. 应用申请成功后在应用管理界面配置应用密钥更新接口APP_SECRET_REFREH_API(用于对称密钥的同步), 配置校验签名APP_API_SECRET（用来验证所受到的密钥是否来自于服务器）。
-### 3. 放置登录标识
-### 4. OAuth2.0对接
- * 用户打开客户端以后，客户端要求用户给予授权。
- * 用户同意给予客户端授权。
- * 客户端使用上一步获得的授权，向认证服务器申请令牌。
- * 认证服务器对客户端进行认证以后，确认无误，同意发放令牌。
- 
-## 三、具体细节
+## 具体细节
 
 
-### 1. 密钥同步验证策略
+### 1. 密钥同步验证
 
 1. 业务服务提供同步接口, 该接口接受来自于认证服务的POST请求。
 2. 通过校验签名APP_API_SECRET判断POST请求是否来自于认证服务器。
