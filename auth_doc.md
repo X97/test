@@ -6,7 +6,7 @@
 
 对称加密算法下先由业务服务验证token的有效性。
 
-####1.2 非对称加密下业务服务处理流程
+#### 1.2 非对称加密下业务服务处理流程
 ![非对称加密算法下的认证流程(1).png](http://upload-images.jianshu.io/upload_images/1803273-56822b9b34f4d982.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 非对称加密算法下由认证服务验证token的有效性。
