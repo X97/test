@@ -13,10 +13,13 @@
 
 ### 业务设计
 #### 数据库
- * 存放注册应用相关的信息
-名称、 描述、 地址、 clilent_key、 client_secret
- * 存放用户相关信息
-mobile_phone、 email、password、 avator 等信息
+![登陆认证SQL.png](http://upload-images.jianshu.io/upload_images/1803273-3343019d76fdf97c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+ * 存放注册应用相关的信息/client
+name、 description、 domain、 clilent_key、 client_secret
+ * 存放用户相关信息/user
+mobile_phone、 email、password、 avator 
+ * 管理每个客户端/ clientmanager
 
 #### 类
 
